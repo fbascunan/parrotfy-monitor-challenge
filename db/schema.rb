@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_25_142725) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_25_164755) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -21,6 +21,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_25_142725) do
     t.string "color", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.json "ai_decision"
     t.index ["player_id", "round_id"], name: "index_bets_on_player_id_and_round_id", unique: true
     t.index ["player_id"], name: "index_bets_on_player_id"
     t.index ["round_id"], name: "index_bets_on_round_id"

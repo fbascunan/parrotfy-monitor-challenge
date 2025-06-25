@@ -1,4 +1,4 @@
-class AI::PlayerBehaviorAnalyzer
+class CasinoAI::PlayerBehaviorAnalyzer
   attr_reader :player, :weather_service
   
   def initialize(player, weather_service = Weather::SantiagoService.new)

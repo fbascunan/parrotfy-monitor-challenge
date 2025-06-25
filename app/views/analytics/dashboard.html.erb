@@ -72,7 +72,7 @@
     <div class="bg-white rounded-lg shadow mb-8">
       <div class="px-6 py-4 border-b border-gray-200">
         <h2 class="text-xl font-semibold text-gray-900">AI Behavior Analysis</h2>
-        <p class="text-sm text-gray-600">How AI influences player decisions</p>
+        <p class="text-sm text-gray-600">OpenAI-powered player psychology and decision making</p>
       </div>
       <div class="overflow-x-auto">
         <table class="min-w-full divide-y divide-gray-200">
@@ -80,10 +80,12 @@
             <tr>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Player</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Risk Tolerance</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Emotional State</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Strategy</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Performance</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Win Rate</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Winnings</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Confidence</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">AI Reasoning</th>
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
@@ -104,6 +106,19 @@
                     <%= insight[:risk_tolerance].to_s.titleize %>
                   </span>
                 </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full
+                    <%= case insight[:emotional_state]
+                        when 'confident' then 'bg-blue-100 text-blue-800'
+                        when 'frustrated' then 'bg-red-100 text-red-800'
+                        when 'desperate' then 'bg-purple-100 text-purple-800'
+                        when 'cautious' then 'bg-yellow-100 text-yellow-800'
+                        when 'excited' then 'bg-green-100 text-green-800'
+                        else 'bg-gray-100 text-gray-800'
+                        end %>">
+                    <%= insight[:emotional_state].to_s.titleize %>
+                  </span>
+                </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                   <%= insight[:betting_strategy].to_s.titleize %>
                 </td>
@@ -120,8 +135,18 @@
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                   <%= insight[:win_rate] %>%
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  $<%= number_with_precision(insight[:total_winnings], precision: 2) %>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="flex items-center">
+                    <div class="w-16 bg-gray-200 rounded-full h-2 mr-2">
+                      <div class="bg-blue-600 h-2 rounded-full" style="width: <%= (insight[:confidence] * 100).round %>%"></div>
+                    </div>
+                    <span class="text-xs text-gray-500"><%= (insight[:confidence] * 100).round %>%</span>
+                  </div>
+                </td>
+                <td class="px-6 py-4 text-sm text-gray-900 max-w-xs">
+                  <div class="truncate" title="<%= insight[:ai_reasoning] %>">
+                    <%= insight[:ai_reasoning] %>
+                  </div>
                 </td>
               </tr>
             <% end %>
