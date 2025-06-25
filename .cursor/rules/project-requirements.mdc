@@ -1,0 +1,57 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Parrotfy Assignment
+
+## Introduction
+
+A simulation must be created, consisting of a dynamic group of people playing roulette. The goal is to build a system to monitor a casino table, where players modify their bets depending on the weather.
+
+## Competencies
+
+- Develop a **Ruby on Rails application** using the latest version.
+- The application must include **views to manage players**, allowing creation, data updates, and adjustments to the amount of money they possess.
+- Players start with a **default balance of $10,000**.
+- Players participate in a **roulette round automatically every 3 minutes**.
+- In each round, players bet **between 8% and 15%** of their total money.
+  - If a player has $1,000 or less, they go **All In**.
+  - If a player has no money, they do not bet.
+- The **betting percentage varies depending on the weather** in Santiago, Chile:
+  - If a **temperature above 23°C is forecast** within the next 7 days, players bet more conservatively: **between 3% and 7%**.
+  - A weather API must be queried to retrieve this information.
+- **Desirable**: Use **AI to condition player behavior**.
+- **Betting Mode**:
+  - Players can bet on **Green, Red, or Black** with probabilities of:
+    - Green: 2%
+    - Red: 49%
+    - Black: 49%
+  - If a player wins:
+    - Red/Black: they recover **twice** the amount bet.
+    - Green: they recover **15 times** the amount bet.
+  - If they lose, they **recover nothing**.
+- The **roulette outcome** uses the **same probabilities**: Green 2%, Red 49%, Black 49%.
+- At the end of the day, **all players receive $10,000**.
+
+## Requirements
+
+- There must be a **view listing all past rounds**, including:
+  - Each player’s bet
+  - The roulette result
+- The **main URL** of the application must lead to this view.
+- **Design is not evaluated.**
+- Any **additional features** not mentioned will be considered in the evaluation, but they are **not mandatory**.
+- **Anything not specified** is left to the developer’s discretion.
+
+## Progress Reporting
+
+- Progress must be pushed to your **personal GitHub account periodically** — do not push everything at the end.
+- The system must run **perfectly on a UNIX system**.
+- Setup **instructions must be included in the repository’s README**.
+- The system must be **deployed to a production server** and a link provided.
+  - Free services such as **Render** can be used.
+
+## Deadline
+
+- **Submission Date**: Wednesday, **June 25, 15:00 hrs**.
