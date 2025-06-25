@@ -20,7 +20,7 @@ gem "tailwindcss-rails"
 gem "jbuilder"
 
 # Sidekiq for background jobs
-gem "sidekiq", "~> 7.0"
+gem "sidekiq", "~> 8.0"
 # Redis for Sidekiq
 gem "redis", "~> 5.0"
 
