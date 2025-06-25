@@ -17,9 +17,9 @@ Rails.application.routes.draw do
 
   # == Sidekiq Web UI ==
   # Uncomment the following lines to enable Sidekiq Web UI in development:
-  # require "sidekiq/web"
-  # mount Sidekiq::Web => "/sidekiq"
+  require "sidekiq/web"
+  mount Sidekiq::Web => "/sidekiq"
 
   # == Action Cable ==
-  # mount ActionCable.server => "/cable"
+  mount ActionCable.server => "/cable"
 end

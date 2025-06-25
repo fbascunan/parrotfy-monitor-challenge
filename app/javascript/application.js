@@ -16,3 +16,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }).mount(el)
   }
 })
+import "./channels"
