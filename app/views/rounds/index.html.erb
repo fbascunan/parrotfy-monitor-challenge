@@ -159,7 +159,7 @@
               <div class="text-sm text-gray-600">
                 <span class="font-medium">Quick Summary:</span>
                 <% winning_bets = round.bets.select(&:won?) %>
-                <% total_winnings = winning_bets.count %>
+                <% total_winnings = winning_bets.sum(&:winnings) %>
                 <span class="text-green-600">$<%= number_with_precision(total_winnings, precision: 2) %> won</span> by 
                 <span class="font-medium"><%= winning_bets.count %></span> players
                 <% if round.bets.any? %>
