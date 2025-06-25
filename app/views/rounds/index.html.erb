@@ -2,21 +2,62 @@
 
 <div class="container mx-auto px-4 py-8">
   <div class="flex justify-between items-center mb-6">
-    <h1 class="text-3xl font-bold text-gray-900">Roulette Rounds</h1>
-    <%= link_to "New Round", new_round_path, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+    <h1 class="text-3xl font-bold text-gray-900">🎰 Roulette Rounds</h1>
+    <div class="flex items-center space-x-4">
+      <!-- Weather Status (Compact) -->
+      <div class="bg-blue-50 border border-blue-200 rounded-lg px-3 py-2">
+        <% weather = Weather::SantiagoService.new %>
+        <div class="flex items-center space-x-2">
+          <span class="text-lg">
+            <% if weather.hot_weather_forecast? %>
+              🔥
+            <% else %>
+              ❄️
+            <% end %>
+          </span>
+          <div class="text-sm">
+            <div class="font-medium text-blue-900">
+              <% if weather.hot_weather_forecast? %>
+                Hot Weather
+              <% else %>
+                Normal Weather
+              <% end %>
+            </div>
+            <div class="text-blue-600">
+              <% if weather.hot_weather_forecast? %>
+                Conservative (3-7%)
+              <% else %>
+                Normal (8-15%)
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Auto-refresh indicator -->
+      <div class="text-sm text-gray-500 flex items-center">
+        <div class="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></div>
+        Auto-refresh every 3min
+      </div>
+    </div>
   </div>
 
   <!-- Vue.js real-time updates -->
   <div id="vue-app" class="mb-6"></div>
 
-  <div class="bg-white shadow overflow-hidden sm:rounded-md">
+  <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+    <div class="px-6 py-4 bg-gray-50 border-b border-gray-200">
+      <h2 class="text-lg font-semibold text-gray-900">Recent Rounds</h2>
+      <p class="text-sm text-gray-600">Live roulette rounds with AI-powered betting decisions</p>
+    </div>
+    
     <ul class="divide-y divide-gray-200">
       <% @rounds.each do |round| %>
-        <li class="px-6 py-4">
+        <li class="px-6 py-4 hover:bg-gray-50 transition-colors">
           <div class="flex items-center justify-between">
             <div class="flex items-center">
               <div class="flex-shrink-0">
-                <div class="h-10 w-10 rounded-full flex items-center justify-center text-white font-bold
+                <div class="h-12 w-12 px-2 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg 
                   <%= case round.result
                       when 'red' then 'bg-red-500'
                       when 'black' then 'bg-gray-800'
@@ -26,52 +67,79 @@
                 </div>
               </div>
               <div class="ml-4">
-                <div class="text-sm font-medium text-gray-900">
+                <div class="text-sm font-semibold text-gray-900">
                   Round #<%= round.id %> - <%= round.created_at.strftime("%B %d, %Y at %I:%M %p") %>
                 </div>
-                <div class="text-sm text-gray-500">
-                  Total Bets: $<%= number_with_precision(round.total_bets, precision: 2) %> | 
-                  Players: <%= round.players.count %>
+                <div class="text-sm text-gray-500 flex items-center space-x-4">
+                  <span>💰 $<%= number_with_precision(round.total_bets, precision: 2) %></span>
+                  <span>👥 <%= round.players.count %> players</span>
+                  <span>🎯 <%= round.bets.count %> bets</span>
                 </div>
               </div>
             </div>
-            <div class="flex space-x-2">
-              <%= link_to "View", round_path(round), class: "text-blue-600 hover:text-blue-900" %>
-              <%= link_to "Edit", edit_round_path(round), class: "text-green-600 hover:text-green-900" %>
-              <%= link_to "Delete", round_path(round), method: :delete, data: { confirm: "Are you sure?" }, class: "text-red-600 hover:text-red-900" %>
+            <div class="flex items-center space-x-2">
+              <%= link_to round_path(round), class: "inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md text-blue-700 bg-blue-100 hover:bg-blue-200 transition-colors" do %>
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                </svg>
+                Details
+              <% end %>
             </div>
           </div>
           
           <!-- Player Bets -->
           <% if round.bets.any? %>
-            <div class="mt-4 ml-14">
-              <h4 class="text-sm font-medium text-gray-700 mb-2">Player Bets:</h4>
+            <div class="mt-4 ml-16">
+              <h4 class="text-sm font-medium text-gray-700 mb-3 flex items-center">
+                <span class="mr-1">👥</span>
+                Player Bets
+              </h4>
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
                 <% round.bets.includes(:player).each do |bet| %>
-                  <div class="text-xs bg-gray-50 p-2 rounded">
-                    <span class="font-medium"><%= bet.player.name %></span>
-                    <span class="text-gray-500">bet $<%= number_with_precision(bet.amount, precision: 2) %></span>
-                    <span class="inline-block ml-1 px-2 py-1 text-xs rounded text-white
-                      <%= case bet.color
-                          when 'red' then 'bg-red-500'
-                          when 'black' then 'bg-gray-800'
-                          when 'green' then 'bg-green-500'
-                          end %>">
-                      <%= bet.color.upcase %>
-                    </span>
-                    <% if bet.won? %>
-                      <span class="text-green-600 font-medium">+$<%= number_with_precision(bet.winnings, precision: 2) %></span>
-                    <% else %>
-                      <span class="text-red-600">Lost</span>
-                    <% end %>
+                  <div class="bg-white border border-gray-200 rounded-lg p-2 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-1">
+                      <span class="font-semibold text-gray-900 text-sm"><%= bet.player.name %></span>
+                      <span class="inline-flex items-center justify-center px-1 h-6 text-xs font-medium rounded text-white
+                        <%= case bet.color
+                            when 'red' then 'bg-red-500'
+                            when 'black' then 'bg-gray-800'
+                            when 'green' then 'bg-green-500'
+                            end %>">
+                        <%= bet.color.upcase %>
+                      </span>
+                    </div>
+                    
+                    <div class="text-xs text-gray-600 mb-1">
+                      <span class="font-medium">$<%= number_with_precision(bet.amount, precision: 2) %></span>
+                      <% if bet.won? %>
+                        <span class="text-green-600 font-medium ml-1">+$<%= number_with_precision(bet.winnings, precision: 2) %></span>
+                      <% else %>
+                        <span class="text-red-600 ml-1">Lost</span>
+                      <% end %>
+                    </div>
                     
                     <!-- AI Decision Info -->
                     <% if bet.ai_decision.present? %>
-                      <div class="mt-1 text-xs text-gray-600">
-                        <span class="font-medium">AI:</span>
-                        <span class="capitalize"><%= bet.ai_emotional_state %></span> |
-                        <span class="capitalize"><%= bet.ai_risk_tolerance %></span> |
-                        <span class="text-blue-600"><%= (bet.ai_confidence * 100).round %>%</span>
+                      <div class="border-t border-gray-100 pt-1">
+                        <div class="flex items-center justify-between text-xs">
+                          <span class="text-gray-500">AI:</span>
+                          <span class="text-blue-600 font-medium"><%= (bet.ai_confidence * 100).round %>%</span>
+                        </div>
+                        <div class="text-xs text-gray-600">
+                          <span class="capitalize"><%= bet.ai_emotional_state %></span> • 
+                          <span class="capitalize"><%= bet.ai_risk_tolerance %></span>
+                        </div>
+                        <% if bet.amount > 0 %>
+                          <div class="text-xs text-green-600">
+                            💰 <%= (bet.amount / bet.player.balance * 100).round(1) %>% of balance
+                            <% if Weather::SantiagoService.new.hot_weather_forecast? %>
+                              <span class="text-orange-600">(🔥 Hot)</span>
+                            <% else %>
+                              <span class="text-blue-600">(❄️ Normal)</span>
+                            <% end %>
+                          </div>
+                        <% end %>
                       </div>
                     <% end %>
                   </div>
