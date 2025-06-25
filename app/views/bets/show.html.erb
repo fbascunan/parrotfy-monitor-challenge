@@ -5,11 +5,26 @@
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
   <% end %>
 
-  <h1 class="font-bold text-4xl">Showing bet</h1>
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="font-bold text-4xl">Bet Details</h1>
+    <div class="flex space-x-2">
+      <%= link_to "Edit this bet", edit_bet_path(@bet), class: "rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+      <%= link_to "Back to bets", bets_path, class: "rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+    </div>
+  </div>
 
-  <%= render @bet %>
+  <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+    <div class="px-6 py-4 bg-gray-50 border-b border-gray-200">
+      <h2 class="text-lg font-semibold text-gray-900">Bet Information</h2>
+      <p class="text-sm text-gray-600">Round #<%= @bet.round_id %> • <%= @bet.created_at.strftime("%B %d, %Y at %I:%M %p") %></p>
+    </div>
+    
+    <div class="p-6">
+      <%= render @bet %>
+    </div>
+  </div>
 
-  <%= link_to "Edit this bet", edit_bet_path(@bet), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-  <%= link_to "Back to bets", bets_path, class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-  <%= button_to "Destroy this bet", @bet, method: :delete, form_class: "sm:inline-block mt-2 sm:mt-0 sm:ml-2", class: "w-full rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
+  <div class="mt-4">
+    <%= button_to "Destroy this bet", @bet, method: :delete, class: "rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
+  </div>
 </div>

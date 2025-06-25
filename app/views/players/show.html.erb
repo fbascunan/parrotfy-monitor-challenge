@@ -184,6 +184,9 @@
                         <div class="text-gray-500">
                           <%= bet.ai_emotional_state.capitalize %> • <%= bet.ai_risk_tolerance.capitalize %>
                         </div>
+                        <div class="text-gray-400 truncate max-w-xs" title="<%= bet.ai_reasoning %>">
+                          <%= bet.ai_reasoning %>
+                        </div>
                       </div>
                     <% else %>
                       <span class="text-gray-400">No AI data</span>

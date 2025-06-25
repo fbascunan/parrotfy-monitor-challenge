@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
+  # Handle legacy ActionCable assets route
+  get "assets/channels", to: proc { [200, {}, [""]] }
+
   # Defines the root path route ("/")
   root "rounds#index"
 

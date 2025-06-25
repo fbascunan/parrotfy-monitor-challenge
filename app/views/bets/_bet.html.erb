@@ -1,18 +1,74 @@
 <div id="<%= dom_id bet %>" class="w-full sm:w-auto my-5 space-y-5">
-  <div>
-    <strong class="block font-medium mb-1">Player:</strong>
-    <%= bet.player_id %>
-  </div>
-  <div>
-    <strong class="block font-medium mb-1">Round:</strong>
-    <%= bet.round_id %>
-  </div>
-  <div>
-    <strong class="block font-medium mb-1">Amount:</strong>
-    <%= bet.amount %>
-  </div>
-  <div>
-    <strong class="block font-medium mb-1">Color:</strong>
-    <%= bet.color %>
+  <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
+    <div class="flex items-center justify-between mb-3">
+      <div>
+        <strong class="block font-medium text-gray-900">Player:</strong>
+        <span class="text-sm text-gray-600"><%= bet.player.name %></span>
+      </div>
+      <div>
+        <strong class="block font-medium text-gray-900">Round:</strong>
+        <span class="text-sm text-gray-600">#<%= bet.round_id %></span>
+      </div>
+    </div>
+    
+    <div class="grid grid-cols-2 gap-4 mb-3">
+      <div>
+        <strong class="block font-medium text-gray-900">Amount:</strong>
+        <span class="text-sm text-gray-600">$<%= number_with_precision(bet.amount, precision: 2) %></span>
+      </div>
+      <div>
+        <strong class="block font-medium text-gray-900">Color:</strong>
+        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium text-white
+          <%= case bet.color
+              when 'red' then 'bg-red-500'
+              when 'black' then 'bg-gray-800'
+              when 'green' then 'bg-green-500'
+              end %>">
+          <%= bet.color.upcase %>
+        </span>
+      </div>
+    </div>
+    
+    <div class="mb-3">
+      <strong class="block font-medium text-gray-900">Result:</strong>
+      <% if bet.won? %>
+        <span class="text-green-600 font-medium">+$<%= number_with_precision(bet.winnings, precision: 2) %></span>
+      <% else %>
+        <span class="text-red-600">Lost</span>
+      <% end %>
+    </div>
+    
+    <!-- AI Decision Info -->
+    <% if bet.ai_decision.present? %>
+      <div class="border-t border-gray-200 pt-3">
+        <strong class="block font-medium text-gray-900 mb-2">🤖 AI Analysis:</strong>
+        <div class="grid grid-cols-2 gap-4 text-sm">
+          <div>
+            <span class="text-gray-500">Confidence:</span>
+            <span class="text-blue-600 font-medium ml-1"><%= (bet.ai_confidence * 100).round %>%</span>
+          </div>
+          <div>
+            <span class="text-gray-500">Emotional State:</span>
+            <span class="text-gray-700 ml-1 capitalize"><%= bet.ai_emotional_state %></span>
+          </div>
+          <div>
+            <span class="text-gray-500">Risk Tolerance:</span>
+            <span class="text-gray-700 ml-1 capitalize"><%= bet.ai_risk_tolerance %></span>
+          </div>
+          <div>
+            <span class="text-gray-500">Bet % of Balance:</span>
+            <span class="text-green-600 ml-1"><%= (bet.amount / bet.player.balance * 100).round(1) %>%</span>
+          </div>
+        </div>
+        <div class="mt-2">
+          <span class="text-gray-500 text-sm">Reasoning:</span>
+          <p class="text-sm text-gray-700 mt-1 italic"><%= bet.ai_reasoning %></p>
+        </div>
+      </div>
+    <% else %>
+      <div class="border-t border-gray-200 pt-3">
+        <span class="text-gray-400 text-sm">No AI analysis available</span>
+      </div>
+    <% end %>
   </div>
 </div>

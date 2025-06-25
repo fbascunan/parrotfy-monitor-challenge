@@ -16,4 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }).mount(el)
   }
 })
+
+// Import ActionCable channels
 import "./channels"

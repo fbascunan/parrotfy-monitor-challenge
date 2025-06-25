@@ -36,10 +36,20 @@ if Round.count.zero?
     bet_amount = rand(800..1500) # 8-15% of 10000
     bet_color = [ 'red', 'black', 'green' ].sample
 
+    # Create AI decision data for the bet
+    ai_data = {
+      emotional_state: ["confident", "cautious", "excited", "neutral"].sample,
+      risk_tolerance: ["conservative", "balanced", "aggressive"].sample,
+      confidence: rand(0.3..0.9).round(2),
+      reasoning: "Sample AI reasoning for #{player.name}: Based on current balance and recent performance, decided to bet #{bet_amount} on #{bet_color}.",
+      amount_modifier: rand(0.8..1.2).round(2)
+    }
+
     bet = player.bets.create!(
       round: round,
       amount: bet_amount,
-      color: bet_color
+      color: bet_color,
+      ai_decision: ai_data
     )
 
     player.update_balance!(-bet_amount)

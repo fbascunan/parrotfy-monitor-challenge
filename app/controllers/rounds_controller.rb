@@ -3,11 +3,12 @@ class RoundsController < ApplicationController
 
   # GET /rounds
   def index
-    @rounds = Round.recent.includes(:bets, :players).limit(50)
+    @rounds = Round.recent.includes(:bets => :player).limit(50)
   end
 
   # GET /rounds/1
   def show
+    @round = Round.includes(:bets => :player).find(params[:id])
   end
 
   # GET /rounds/new
@@ -48,7 +49,7 @@ class RoundsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_round
-      @round = Round.find(params[:id])
+      @round = Round.includes(:bets => :player).find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

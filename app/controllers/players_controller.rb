@@ -3,11 +3,12 @@ class PlayersController < ApplicationController
 
   # GET /players or /players.json
   def index
-    @players = Player.all
+    @players = Player.includes(:bets => :round).all
   end
 
   # GET /players/1 or /players/1.json
   def show
+    @player = Player.includes(:bets => :round).find(params[:id])
   end
 
   # GET /players/new
@@ -60,11 +61,11 @@ class PlayersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_player
-      @player = Player.find(params.expect(:id))
+      @player = Player.includes(:bets => :round).find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def player_params
-      params.expect(player: [ :name, :balance ])
+      params.require(:player).permit(:name, :balance)
     end
 end

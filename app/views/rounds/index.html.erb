@@ -137,6 +137,9 @@
                           <span class="capitalize"><%= bet.ai_emotional_state %></span> • 
                           <span class="capitalize"><%= bet.ai_risk_tolerance %></span>
                         </div>
+                        <div class="text-xs text-gray-500 mt-1 truncate" title="<%= bet.ai_reasoning %>">
+                          <%= bet.ai_reasoning %>
+                        </div>
                         <% if bet.amount > 0 %>
                           <div class="text-xs text-green-600">
                             💰 <%= (bet.amount / bet.player.balance * 100).round(1) %>% of balance

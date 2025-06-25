@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_25_164755) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_25_170000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -22,8 +22,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_25_164755) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.json "ai_decision"
+    t.index ["amount"], name: "index_bets_on_amount"
+    t.index ["color", "created_at"], name: "index_bets_on_color_and_created_at"
+    t.index ["color"], name: "index_bets_on_color"
+    t.index ["created_at"], name: "index_bets_on_created_at"
+    t.index ["player_id", "created_at"], name: "index_bets_on_player_id_and_created_at"
     t.index ["player_id", "round_id"], name: "index_bets_on_player_id_and_round_id", unique: true
     t.index ["player_id"], name: "index_bets_on_player_id"
+    t.index ["round_id", "created_at"], name: "index_bets_on_round_id_and_created_at"
     t.index ["round_id"], name: "index_bets_on_round_id"
   end
 
@@ -32,6 +38,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_25_164755) do
     t.decimal "balance", precision: 10, scale: 2, default: "10000.0", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["balance"], name: "index_players_on_balance"
   end
 
   create_table "rounds", force: :cascade do |t|
@@ -39,6 +46,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_25_164755) do
     t.decimal "total_bets", precision: 10, scale: 2, default: "0.0", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["created_at"], name: "index_rounds_on_created_at"
+    t.index ["result"], name: "index_rounds_on_result"
   end
 
   add_foreign_key "bets", "players"
