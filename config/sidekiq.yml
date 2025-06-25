@@ -1,0 +1,12 @@
+:concurrency: <%= ENV.fetch("SIDEKIQ_CONCURRENCY", 5) %>
+:queues:
+  - default
+  - mailers
+
+:redis:
+  url: <%= ENV.fetch("REDIS_URL", "redis://localhost:6379/0") %>
+
+:logfile: ./log/sidekiq.log
+:pidfile: ./tmp/pids/sidekiq.pid
+
+:environment: <%= ENV.fetch("RAILS_ENV", "development") %> 

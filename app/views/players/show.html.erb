@@ -96,7 +96,7 @@
               <dt class="text-sm font-medium text-gray-500 truncate">Win Rate</dt>
               <dd class="text-lg font-medium text-gray-900">
                 <% if @player.bets.any? %>
-                  <% wins = @player.bets.where(won: true).count %>
+                  <% wins = @player.bets.select(&:won?).count %>
                   <% total = @player.bets.count %>
                   <%= (wins.to_f / total * 100).round(1) %>%
                 <% else %>
@@ -121,7 +121,7 @@
             <dl>
               <dt class="text-sm font-medium text-gray-500 truncate">Total Winnings</dt>
               <dd class="text-lg font-medium text-gray-900">
-                $<%= number_with_precision(@player.bets.where(won: true).sum(:winnings), precision: 2) %>
+                $<%= number_with_precision(@player.bets.select(&:won?).sum(&:winnings), precision: 2) %>
               </dd>
             </dl>
           </div>
