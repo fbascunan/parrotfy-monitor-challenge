@@ -1,0 +1,76 @@
+<% content_for :title, "Rounds" %>
+
+<div class="container mx-auto px-4 py-8">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold text-gray-900">Roulette Rounds</h1>
+    <%= link_to "New Round", new_round_path, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+  </div>
+
+  <!-- Vue.js real-time updates -->
+  <div id="vue-app" class="mb-6"></div>
+
+  <div class="bg-white shadow overflow-hidden sm:rounded-md">
+    <ul class="divide-y divide-gray-200">
+      <% @rounds.each do |round| %>
+        <li class="px-6 py-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <div class="flex-shrink-0">
+                <div class="h-10 w-10 rounded-full flex items-center justify-center text-white font-bold
+                  <%= case round.result
+                      when 'red' then 'bg-red-500'
+                      when 'black' then 'bg-gray-800'
+                      when 'green' then 'bg-green-500'
+                      end %>">
+                  <%= round.result.upcase %>
+                </div>
+              </div>
+              <div class="ml-4">
+                <div class="text-sm font-medium text-gray-900">
+                  Round #<%= round.id %> - <%= round.created_at.strftime("%B %d, %Y at %I:%M %p") %>
+                </div>
+                <div class="text-sm text-gray-500">
+                  Total Bets: $<%= number_with_precision(round.total_bets, precision: 2) %> | 
+                  Players: <%= round.players.count %>
+                </div>
+              </div>
+            </div>
+            <div class="flex space-x-2">
+              <%= link_to "View", round_path(round), class: "text-blue-600 hover:text-blue-900" %>
+              <%= link_to "Edit", edit_round_path(round), class: "text-green-600 hover:text-green-900" %>
+              <%= link_to "Delete", round_path(round), method: :delete, data: { confirm: "Are you sure?" }, class: "text-red-600 hover:text-red-900" %>
+            </div>
+          </div>
+          
+          <!-- Player Bets -->
+          <% if round.bets.any? %>
+            <div class="mt-4 ml-14">
+              <h4 class="text-sm font-medium text-gray-700 mb-2">Player Bets:</h4>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+                <% round.bets.includes(:player).each do |bet| %>
+                  <div class="text-xs bg-gray-50 p-2 rounded">
+                    <span class="font-medium"><%= bet.player.name %></span>
+                    <span class="text-gray-500">bet $<%= number_with_precision(bet.amount, precision: 2) %></span>
+                    <span class="inline-block ml-1 px-2 py-1 text-xs rounded text-white
+                      <%= case bet.color
+                          when 'red' then 'bg-red-500'
+                          when 'black' then 'bg-gray-800'
+                          when 'green' then 'bg-green-500'
+                          end %>">
+                      <%= bet.color.upcase %>
+                    </span>
+                    <% if bet.won? %>
+                      <span class="text-green-600 font-medium">+$<%= number_with_precision(bet.winnings, precision: 2) %></span>
+                    <% else %>
+                      <span class="text-red-600">Lost</span>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
