@@ -25,5 +25,6 @@ module ParrotfyMonitorChallenge
     # config.eager_load_paths << Rails.root.join("extras")
 
     config.autoload_paths << Rails.root.join("app/usecases")
+    config.autoload_paths << Rails.root.join("app/usecases/ai")
   end
 end

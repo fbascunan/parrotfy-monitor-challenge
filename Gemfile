@@ -27,6 +27,9 @@ gem "redis", "~> 5.0"
 # HTTP client for weather API
 gem "httparty", "~> 0.21"
 
+# OpenAI integration
+gem "ruby-openai", "~> 7.0"
+
 # Cron jobs
 gem "whenever", "~> 1.0", require: false
 

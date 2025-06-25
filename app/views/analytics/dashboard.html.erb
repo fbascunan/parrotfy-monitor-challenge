@@ -1,0 +1,221 @@
+<div class="min-h-screen bg-gray-50">
+  <div class="container mx-auto px-4 py-8">
+    <!-- Header -->
+    <div class="mb-8">
+      <h1 class="text-4xl font-bold text-gray-900 mb-2">Casino Analytics Dashboard</h1>
+      <p class="text-gray-600">AI-powered insights and player behavior analysis</p>
+    </div>
+
+    <!-- Vue.js Real-time Updates -->
+    <div id="vue-app" class="mb-8"></div>
+
+    <!-- Key Metrics -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-center">
+          <div class="p-3 rounded-full bg-blue-100">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <p class="text-sm font-medium text-gray-500">Total Rounds</p>
+            <p class="text-2xl font-semibold text-gray-900"><%= @total_rounds %></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-center">
+          <div class="p-3 rounded-full bg-green-100">
+            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <p class="text-sm font-medium text-gray-500">Active Players</p>
+            <p class="text-2xl font-semibold text-gray-900"><%= @players.count %></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-center">
+          <div class="p-3 rounded-full bg-yellow-100">
+            <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <p class="text-sm font-medium text-gray-500">Total Bets</p>
+            <p class="text-2xl font-semibold text-gray-900"><%= @total_bets %></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-center">
+          <div class="p-3 rounded-full bg-purple-100">
+            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <p class="text-sm font-medium text-gray-500">Total Volume</p>
+            <p class="text-2xl font-semibold text-gray-900">$<%= number_with_precision(@total_volume, precision: 0) %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI Behavior Analysis -->
+    <div class="bg-white rounded-lg shadow mb-8">
+      <div class="px-6 py-4 border-b border-gray-200">
+        <h2 class="text-xl font-semibold text-gray-900">AI Behavior Analysis</h2>
+        <p class="text-sm text-gray-600">How AI influences player decisions</p>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Player</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Risk Tolerance</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Strategy</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Performance</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Win Rate</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Winnings</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <% @ai_insights.each do |insight| %>
+              <tr>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-sm font-medium text-gray-900"><%= insight[:player].name %></div>
+                  <div class="text-sm text-gray-500">$<%= number_with_precision(insight[:player].balance, precision: 2) %></div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full
+                    <%= case insight[:risk_tolerance]
+                        when :conservative then 'bg-green-100 text-green-800'
+                        when :aggressive then 'bg-yellow-100 text-yellow-800'
+                        when :desperate then 'bg-red-100 text-red-800'
+                        else 'bg-gray-100 text-gray-800'
+                        end %>">
+                    <%= insight[:risk_tolerance].to_s.titleize %>
+                  </span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  <%= insight[:betting_strategy].to_s.titleize %>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full
+                    <%= case insight[:recent_performance]
+                        when :hot then 'bg-green-100 text-green-800'
+                        when :cold then 'bg-red-100 text-red-800'
+                        else 'bg-gray-100 text-gray-800'
+                        end %>">
+                    <%= insight[:recent_performance].to_s.titleize %>
+                  </span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  <%= insight[:win_rate] %>%
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  $<%= number_with_precision(insight[:total_winnings], precision: 2) %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Player Performance -->
+    <div class="bg-white rounded-lg shadow mb-8">
+      <div class="px-6 py-4 border-b border-gray-200">
+        <h2 class="text-xl font-semibold text-gray-900">Player Performance</h2>
+        <p class="text-sm text-gray-600">Detailed betting statistics</p>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Player</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Bets</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Wins</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Win Rate</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Wagered</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Net Profit</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Favorite Color</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <% @player_performance.each do |perf| %>
+              <tr>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-sm font-medium text-gray-900"><%= perf[:player].name %></div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  <%= perf[:total_bets] %>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  <%= perf[:wins] %>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  <%= perf[:win_rate] %>%
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  $<%= number_with_precision(perf[:total_wagered], precision: 2) %>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="text-sm <%= perf[:net_profit] >= 0 ? 'text-green-600' : 'text-red-600' %>">
+                    <%= perf[:net_profit] >= 0 ? '+' : '' %>$<%= number_with_precision(perf[:net_profit], precision: 2) %>
+                  </span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full text-white
+                    <%= case perf[:favorite_color]
+                        when 'red' then 'bg-red-500'
+                        when 'black' then 'bg-gray-800'
+                        when 'green' then 'bg-green-500'
+                        else 'bg-gray-500'
+                        end %>">
+                    <%= perf[:favorite_color].upcase %>
+                  </span>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Weather Impact -->
+    <div class="bg-white rounded-lg shadow">
+      <div class="px-6 py-4 border-b border-gray-200">
+        <h2 class="text-xl font-semibold text-gray-900">Weather Impact Analysis</h2>
+        <p class="text-sm text-gray-600">How weather affects betting behavior</p>
+      </div>
+      <div class="p-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-blue-50 rounded-lg p-4">
+            <h3 class="text-lg font-medium text-blue-900 mb-2">Hot Weather (>23°C)</h3>
+            <div class="space-y-2">
+              <p class="text-sm text-blue-700">Rounds: <%= @weather_impact[:hot_weather_rounds] %></p>
+              <p class="text-sm text-blue-700">Avg Bet: $<%= number_with_precision(@weather_impact[:hot_weather_avg_bet], precision: 2) %></p>
+              <p class="text-sm text-blue-700">Strategy: Conservative (3-7%)</p>
+            </div>
+          </div>
+          <div class="bg-green-50 rounded-lg p-4">
+            <h3 class="text-lg font-medium text-green-900 mb-2">Normal Weather</h3>
+            <div class="space-y-2">
+              <p class="text-sm text-green-700">Rounds: <%= @weather_impact[:normal_weather_rounds] %></p>
+              <p class="text-sm text-green-700">Avg Bet: $<%= number_with_precision(@weather_impact[:normal_weather_avg_bet], precision: 2) %></p>
+              <p class="text-sm text-green-700">Strategy: Normal (8-15%)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

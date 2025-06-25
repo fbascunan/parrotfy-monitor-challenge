@@ -1,17 +1,27 @@
 class Players::PlaceBet
-  attr_reader :player, :round, :weather_service
+  attr_reader :player, :round, :weather_service, :ai_analyzer
   
   def initialize(player, round, weather_service = Weather::SantiagoService.new)
     @player = player
     @round = round
     @weather_service = weather_service
+    @ai_analyzer = AI::PlayerBehaviorAnalyzer.new(player, weather_service)
   end
   
   def call
     return false unless player.can_bet?
     
-    bet_amount = calculate_bet_amount
-    bet_color = choose_bet_color
+    # Get AI decision
+    ai_decision = ai_analyzer.get_ai_betting_decision
+    
+    # AI might decide to skip this round
+    if ai_decision[:skip]
+      Rails.logger.info "Player #{player.name} skipped round #{round.id} due to: #{ai_decision[:reason]}"
+      return false
+    end
+    
+    bet_amount = calculate_bet_amount(ai_decision[:amount_modifier])
+    bet_color = ai_decision[:color]
     
     bet = player.bets.create!(
       round: round,
@@ -22,17 +32,21 @@ class Players::PlaceBet
     player.update_balance!(-bet_amount)
     round.update!(total_bets: round.total_bets + bet_amount)
     
+    # Log AI decision for debugging
+    Rails.logger.info "AI Decision for #{player.name}: Color=#{bet_color}, Amount=$#{bet_amount}, Confidence=#{ai_decision[:confidence]}"
+    
     bet
   end
   
   private
   
-  def calculate_bet_amount
+  def calculate_bet_amount(ai_modifier = 1.0)
     if player.all_in?
       player.balance
     else
-      percentage = betting_percentage
-      (player.balance * percentage / 100.0).round(2)
+      base_percentage = betting_percentage
+      adjusted_percentage = (base_percentage * ai_modifier).clamp(1, 100)
+      (player.balance * adjusted_percentage / 100.0).round(2)
     end
   end
   
@@ -43,15 +57,6 @@ class Players::PlaceBet
     else
       # Normal betting: 8-15%
       rand(8..15)
-    end
-  end
-  
-  def choose_bet_color
-    rand = Random.rand(100)
-    case rand
-    when 0..1 then 'green'
-    when 2..50 then 'red'
-    else 'black'
     end
   end
 end 
