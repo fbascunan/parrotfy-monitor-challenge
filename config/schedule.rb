@@ -23,17 +23,17 @@
 set :output, "log/cron.log"
 
 # Set environment variables for cron
-env :PATH, ENV['PATH']
-env :GEM_HOME, ENV['GEM_HOME']
-env :GEM_PATH, ENV['GEM_PATH']
-env :RBENV_ROOT, ENV['RBENV_ROOT']
-env :RBENV_VERSION, ENV['RBENV_VERSION']
+env :PATH, ENV["PATH"]
+env :GEM_HOME, ENV["GEM_HOME"]
+env :GEM_PATH, ENV["GEM_PATH"]
+env :RBENV_ROOT, ENV["RBENV_ROOT"]
+env :RBENV_VERSION, ENV["RBENV_VERSION"]
 
 # Set the job_type to use the full path
 job_type :rails_runner, "cd :path && :environment_variable=:environment bundle exec rails runner ':task' :output"
 
 # Set environment to development
-set :environment, 'development'
+set :environment, "development"
 
 # Run roulette rounds every 3 minutes
 every 3.minutes do
@@ -41,6 +41,6 @@ every 3.minutes do
 end
 
 # Reset all player balances to $10,000 daily at midnight
-every 1.day, at: '12:00 am' do
+every 1.day, at: "12:00 am" do
   rails_runner "Player.update_all(balance: 10000.0)"
 end

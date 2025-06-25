@@ -31,28 +31,28 @@ if Round.count.zero?
     result: Round.generate_result,
     total_bets: 0
   )
-  
+
   Player.all.each do |player|
     bet_amount = rand(800..1500) # 8-15% of 10000
-    bet_color = ['red', 'black', 'green'].sample
-    
+    bet_color = [ 'red', 'black', 'green' ].sample
+
     bet = player.bets.create!(
       round: round,
       amount: bet_amount,
       color: bet_color
     )
-    
+
     player.update_balance!(-bet_amount)
   end
-  
+
   # Update round total
   round.update!(total_bets: round.bets.sum(:amount))
-  
+
   # Process results
   round.bets.each do |bet|
     winnings = bet.winnings
     bet.player.update_balance!(winnings) if winnings > 0
   end
-  
+
   puts "Created sample round with #{round.bets.count} bets"
 end

@@ -11,11 +11,11 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "rounds#index"
-  
+
   resources :rounds
   resources :players
   resources :bets
-  
+
   # Analytics
   get "analytics/dashboard", to: "analytics#dashboard", as: :analytics_dashboard
 

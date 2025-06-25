@@ -8,7 +8,7 @@ class CreateBets < ActiveRecord::Migration[8.0]
 
       t.timestamps
     end
-    
-    add_index :bets, [:player_id, :round_id], unique: true
+
+    add_index :bets, [ :player_id, :round_id ], unique: true
   end
 end
