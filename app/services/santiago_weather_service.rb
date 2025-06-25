@@ -1,4 +1,4 @@
-class Weather::SantiagoService
+class SantiagoWeatherService
   include HTTParty
 
   base_uri "https://api.tomorrow.io/v4"

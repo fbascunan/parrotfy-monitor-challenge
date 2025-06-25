@@ -20,7 +20,7 @@ class AnalyticsController < ApplicationController
 
     players.each do |player|
       begin
-        analyzer = Ai::OpenaiBehaviorAnalyzer.new(player)
+        analyzer = OpenaiBehaviorAnalyzerService.new(player)
         behavior = analyzer.analyze_betting_behavior
 
         insights << {
@@ -100,7 +100,7 @@ class AnalyticsController < ApplicationController
   end
 
   def analyze_weather_impact
-    weather_service = Weather::SantiagoService.new
+    weather_service = SantiagoWeatherService.new
     hot_weather_rounds = []
     normal_weather_rounds = []
 

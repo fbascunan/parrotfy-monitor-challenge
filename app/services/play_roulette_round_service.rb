@@ -1,7 +1,7 @@
-class Rounds::PlayRouletteRound
+class PlayRouletteRoundService
   attr_reader :weather_service
 
-  def initialize(weather_service = Weather::SantiagoService.new)
+  def initialize(weather_service = SantiagoWeatherService.new)
     @weather_service = weather_service
   end
 
@@ -12,7 +12,7 @@ class Rounds::PlayRouletteRound
     )
 
     Player.active.find_each do |player|
-      Players::PlaceBet.new(player, round, weather_service).call
+      PlaceBetService.new(player, round, weather_service).call
     end
 
     process_results(round)

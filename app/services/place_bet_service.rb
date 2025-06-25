@@ -1,14 +1,11 @@
-# Load the Ai module for background jobs
-load Rails.root.join("app/usecases/ai/openai_behavior_analyzer.rb") unless defined?(Ai)
-
-class Players::PlaceBet
+class PlaceBetService
   attr_reader :player, :round, :weather_service, :ai_analyzer
 
-  def initialize(player, round, weather_service = Weather::SantiagoService.new)
+  def initialize(player, round, weather_service = SantiagoWeatherService.new)
     @player = player
     @round = round
     @weather_service = weather_service
-    @ai_analyzer = Ai::OpenaiBehaviorAnalyzer.new(player, weather_service)
+    @ai_analyzer = OpenaiBehaviorAnalyzerService.new(player, weather_service)
   end
 
   def call

@@ -6,7 +6,7 @@
     <div class="flex items-center space-x-4">
       <!-- Weather Status (Compact) -->
       <div class="bg-blue-50 border border-blue-200 rounded-lg px-3 py-2">
-        <% weather = Weather::SantiagoService.new %>
+        <% weather = SantiagoWeatherService.new %>
         <div class="flex items-center space-x-2">
           <span class="text-lg">
             <% if weather.hot_weather_forecast? %>
@@ -140,7 +140,7 @@
                         <% if bet.amount > 0 %>
                           <div class="text-xs text-green-600">
                             💰 <%= (bet.amount / bet.player.balance * 100).round(1) %>% of balance
-                            <% if Weather::SantiagoService.new.hot_weather_forecast? %>
+                            <% if SantiagoWeatherService.new.hot_weather_forecast? %>
                               <span class="text-orange-600">(🔥 Hot)</span>
                             <% else %>
                               <span class="text-blue-600">(❄️ Normal)</span>
