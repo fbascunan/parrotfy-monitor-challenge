@@ -20,7 +20,7 @@ class AnalyticsController < ApplicationController
 
     players.each do |player|
       begin
-        analyzer = AI::OpenAIBehaviorAnalyzer.new(player)
+        analyzer = Ai::OpenaiBehaviorAnalyzer.new(player)
         behavior = analyzer.analyze_betting_behavior
 
         insights << {

@@ -1,5 +1,5 @@
-# Load the CasinoAI module for background jobs
-load Rails.root.join("app/usecases/ai.rb") unless defined?(CasinoAI)
+# Load the Ai module for background jobs
+load Rails.root.join("app/usecases/ai/openai_behavior_analyzer.rb") unless defined?(Ai)
 
 class Players::PlaceBet
   attr_reader :player, :round, :weather_service, :ai_analyzer
@@ -8,7 +8,7 @@ class Players::PlaceBet
     @player = player
     @round = round
     @weather_service = weather_service
-    @ai_analyzer = CasinoAI::OpenAIBehaviorAnalyzer.new(player, weather_service)
+    @ai_analyzer = Ai::OpenaiBehaviorAnalyzer.new(player, weather_service)
   end
 
   def call
