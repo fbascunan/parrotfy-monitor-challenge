@@ -80,12 +80,24 @@ class PlayerBehaviorAnalyzerService
         # Won last time, might stick with same color or try something different
         [ last_bet.color, least_used ].compact.sample
       else
-        # Lost last time, might change strategy
-        [ "red", "black", "green" ].reject { |c| c == last_bet.color }.sample
+        # Lost last time, might change strategy - use weighted random instead of just rejecting
+        available_colors = ["red", "black", "green"].reject { |c| c == last_bet.color }
+        available_colors.sample
       end
     else
-      # New player, random choice
-      [ "red", "black", "green" ].sample
+      # New player, use weighted random choice
+      weights = { "red" => 49, "black" => 49, "green" => 2 }
+      total = weights.values.sum
+      random = rand(total)
+
+      cumulative_weight = 0
+      weights.each do |color, weight|
+        cumulative_weight += weight
+        return color if random < cumulative_weight
+      end
+
+      # Fallback
+      ["red", "black", "green"].sample
     end
   end
 

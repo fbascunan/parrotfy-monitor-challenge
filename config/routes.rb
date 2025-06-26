@@ -12,15 +12,18 @@ Rails.application.routes.draw do
   # Handle legacy ActionCable assets route
   get "assets/channels", to: proc { [200, {}, [""]] }
 
-  # Defines the root path route ("/")
-  root "rounds#index"
+  # Internationalization routes
+  scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
+    # Defines the root path route ("/")
+    root "rounds#index"
 
-  resources :rounds
-  resources :players
-  resources :bets
+    resources :rounds
+    resources :players
+    resources :bets
 
-  # Analytics
-  get "analytics/dashboard", to: "analytics#dashboard", as: :analytics_dashboard
+    # Analytics
+    get "analytics/dashboard", to: "analytics#dashboard", as: :analytics_dashboard
+  end
 
   # == Sidekiq Web UI ==
   # Uncomment the following lines to enable Sidekiq Web UI in development:

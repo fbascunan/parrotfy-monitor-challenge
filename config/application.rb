@@ -26,5 +26,10 @@ module ParrotfyMonitorChallenge
 
     config.autoload_paths << Rails.root.join("app/services")
     config.eager_load_paths << Rails.root.join("app/services")
+    
+    # Internationalization
+    config.i18n.available_locales = [:en, :es]
+    config.i18n.default_locale = :en
+    config.i18n.fallbacks = true
   end
 end

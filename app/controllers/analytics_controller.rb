@@ -11,6 +11,19 @@ class AnalyticsController < ApplicationController
     @ai_insights = generate_ai_insights_optimized
     @player_performance = generate_player_performance_optimized
     @weather_impact = analyze_weather_impact_optimized
+
+    respond_to do |format|
+      format.html
+      format.json do
+        render json: {
+          total_rounds: @total_rounds,
+          active_players: @players.count,
+          total_bets: @total_bets,
+          total_volume: @total_volume,
+          last_updated: Time.current
+        }
+      end
+    end
   end
 
   private
@@ -18,10 +31,21 @@ class AnalyticsController < ApplicationController
   def generate_ai_insights_optimized
     insights = []
 
+    # Get the latest bet with AI data for each player using a subquery
+    player_ids = @players.pluck(:id)
+    latest_bet_ids = Bet.where(player_id: player_ids)
+                        .where.not(ai_decision: nil)
+                        .select('DISTINCT ON (player_id) id')
+                        .order(:player_id, created_at: :desc)
+                        .pluck(:id)
+
+    recent_bets_with_ai = Bet.where(id: latest_bet_ids).includes(:player)
+    ai_bets_by_player = recent_bets_with_ai.index_by(&:player_id)
+
     @players.each do |player|
       begin
-        # Get the most recent bet with AI data, or generate new analysis
-        recent_bet_with_ai = player.bets.where.not(ai_decision: nil).order(created_at: :desc).first
+        # Get the most recent bet with AI data from our preloaded data
+        recent_bet_with_ai = ai_bets_by_player[player.id]
         
         if recent_bet_with_ai&.ai_decision.present?
           # Use stored AI data from the most recent bet

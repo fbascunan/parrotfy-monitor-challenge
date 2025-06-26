@@ -1,0 +1,194 @@
+es:
+  hello: "Hola mundo"
+  
+  # Application
+  app_name: "Monitor del Casino Parrotfy"
+  casino_name: "Casino Parrotfy"
+  
+  # Navigation
+  nav_rounds: "Rondas"
+  nav_players: "Jugadores"
+  nav_bets: "Apuestas"
+  nav_analytics: "Análisis"
+  nav_dashboard: "Panel"
+  
+  # Common actions
+  actions:
+    new: "Nuevo"
+    edit: "Editar"
+    show: "Ver"
+    delete: "Eliminar"
+    destroy: "Destruir"
+    back: "Atrás"
+    save: "Guardar"
+    cancel: "Cancelar"
+    update: "Actualizar"
+    create: "Crear"
+    details: "Detalles"
+  
+  # Status
+  status:
+    latest: "Último"
+    active: "Activo"
+    inactive: "Inactivo"
+    won: "Ganó"
+    lost: "Perdió"
+    pending: "Pendiente"
+  
+  # Colors
+  colors:
+    red: "Rojo"
+    black: "Negro"
+    green: "Verde"
+  
+  # Weather
+  weather:
+    hot: "Clima Caluroso"
+    normal: "Clima Normal"
+    conservative: "Conservador (3-7%)"
+    normal_betting: "Normal (8-15%)"
+    temperature: "Temperatura"
+    forecast: "Pronóstico"
+  
+  # Roulette
+  roulette:
+    title: "🎲 Rondas de Ruleta"
+    subtitle: "Rondas de ruleta en vivo con decisiones de apuestas impulsadas por IA"
+    round: "Ronda"
+    rounds: "Rondas"
+    result: "Resultado"
+    total_bets: "Total de Apuestas"
+    players_count: "Jugadores"
+    bets_count: "Apuestas"
+    auto_refresh: "Actualización automática cada 3 min"
+    recent_rounds: "Rondas Recientes"
+    player_bets: "Apuestas de Jugadores"
+    quick_summary: "Resumen Rápido"
+    won_by: "ganado por"
+    win_rate: "tasa de ganancia"
+    latest_round: "Último"
+  
+  # Players
+  players:
+    title: "Jugadores"
+    subtitle: "Gestionar jugadores del casino y sus saldos"
+    name: "Nombre"
+    balance: "Saldo"
+    total_bets: "Total de Apuestas"
+    win_rate: "Tasa de Ganancia"
+    total_winnings: "Ganancias Totales"
+    net_profit: "Beneficio Neto"
+    favorite_color: "Color Favorito"
+    betting_history: "Historial de Apuestas Reciente"
+    ai_analysis: "Análisis de IA"
+    emotional_state: "Estado Emocional"
+    risk_tolerance: "Tolerancia al Riesgo"
+    confidence: "Confianza"
+    reasoning: "Razonamiento"
+    performance: "Rendimiento"
+    patterns: "Patrones"
+    recent_bets: "Apuestas Recientes"
+    all_in: "Todo o Nada"
+    can_bet: "Puede Apostar"
+    cannot_bet: "No Puede Apostar"
+  
+  # Bets
+  bets:
+    title: "Apuestas"
+    subtitle: "Todas las apuestas de ruleta y sus resultados"
+    amount: "Cantidad"
+    color: "Color"
+    player: "Jugador"
+    round: "Ronda"
+    winnings: "Ganancias"
+    outcome: "Resultado"
+    ai_decision: "Decisión de IA"
+    ai_confidence: "Confianza de IA"
+    ai_reasoning: "Razonamiento de IA"
+    percentage_of_balance: "del saldo"
+    hot_weather: "Caluroso"
+    normal_weather: "Normal"
+  
+  # Analytics
+  analytics:
+    title: "Panel de Análisis"
+    subtitle: "Información completa del rendimiento del casino"
+    overview: "Resumen"
+    total_rounds: "Total de Rondas"
+    total_bets: "Total de Apuestas"
+    total_wagered: "Total Apostado"
+    total_winnings: "Ganancias Totales"
+    average_bet: "Apuesta Promedio"
+    player_performance: "Rendimiento de Jugadores"
+    ai_insights: "Perspectivas de IA"
+    weather_impact: "Impacto del Clima"
+    betting_trends: "Tendencias de Apuestas"
+    hot_weather_rounds: "Rondas de Clima Caluroso"
+    normal_weather_rounds: "Rondas de Clima Normal"
+    hot_weather_avg_bet: "Apuesta Promedio Clima Caluroso"
+    normal_weather_avg_bet: "Apuesta Promedio Clima Normal"
+    player_analysis: "Análisis de Jugadores"
+    risk_analysis: "Análisis de Riesgo"
+    emotional_analysis: "Análisis Emocional"
+    strategy_analysis: "Análisis de Estrategia"
+    recent_performance: "Rendimiento Reciente"
+    total_wagered: "Total Apostado"
+    net_profit: "Beneficio Neto"
+    favorite_color: "Color Favorito"
+    betting_patterns: "Patrones de Apuestas"
+    color_loyalist: "Leal al Color"
+    color_switcher: "Cambiador de Color"
+    increasing_bets: "Apuestas Crecientes"
+    decreasing_bets: "Apuestas Decrecientes"
+    hot_streak: "Racha Ganadora"
+    cold_streak: "Racha Perdedora"
+    unpredictable: "Impredecible"
+    new_player: "Jugador Nuevo"
+  
+  # Messages
+  messages:
+    created: "%{resource} fue creado exitosamente."
+    updated: "%{resource} fue actualizado exitosamente."
+    destroyed: "%{resource} fue eliminado exitosamente."
+    error: "Hubo un error procesando tu solicitud."
+    not_found: "%{resource} no encontrado."
+    unauthorized: "No estás autorizado para realizar esta acción."
+  
+  # Time
+  time:
+    ago: "hace %{time}"
+    just_now: "Justo ahora"
+    minutes: "minutos"
+    hours: "horas"
+    days: "días"
+  
+  # Numbers
+  numbers:
+    currency: "$%{number}"
+    percentage: "%{number}%"
+    decimal: "%{number}"
+  
+  # AI
+  ai:
+    analysis: "Análisis de IA"
+    reasoning: "Razonamiento de IA"
+    confidence: "Confianza de IA"
+    emotional_state: "Estado Emocional"
+    risk_tolerance: "Tolerancia al Riesgo"
+    betting_strategy: "Estrategia de Apuestas"
+    unavailable: "Análisis de IA no disponible"
+    fallback: "Análisis de respaldo debido a la indisponibilidad del servicio de IA"
+    temporary_unavailable: "Análisis de IA temporalmente no disponible"
+  
+  # Performance
+  performance:
+    hot: "Caliente"
+    cold: "Frío"
+    neutral: "Neutral"
+    conservative: "Conservador"
+    balanced: "Equilibrado"
+    aggressive: "Agresivo"
+    desperate: "Desesperado"
+    percentage_based: "Basado en Porcentaje"
+    momentum_based: "Basado en Momentum"
+    all_in: "Todo o Nada" 

@@ -4,6 +4,30 @@ class RoundsController < ApplicationController
   # GET /rounds
   def index
     @rounds = Round.recent.includes(:bets => :player).limit(50)
+    
+    # Pre-calculate counts to avoid N+1 queries
+    round_ids = @rounds.pluck(:id)
+    
+    # Get bet counts per round
+    bet_counts = Bet.where(round_id: round_ids)
+                   .group(:round_id)
+                   .count
+    
+    # Get unique player counts per round
+    player_counts = Bet.where(round_id: round_ids)
+                      .joins(:player)
+                      .group(:round_id)
+                      .distinct
+                      .count('players.id')
+    
+    # Store the counts for use in the view
+    @round_stats = {}
+    round_ids.each do |round_id|
+      @round_stats[round_id] = {
+        bet_count: bet_counts[round_id] || 0,
+        player_count: player_counts[round_id] || 0
+      }
+    end
   end
 
   # GET /rounds/1

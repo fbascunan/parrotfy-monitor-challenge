@@ -29,3 +29,195 @@
 
 en:
   hello: "Hello world"
+  
+  # Application
+  app_name: "Parrotfy Casino Monitor"
+  casino_name: "Parrotfy Casino"
+  
+  # Navigation
+  nav_rounds: "Rounds"
+  nav_players: "Players"
+  nav_bets: "Bets"
+  nav_analytics: "Analytics"
+  nav_dashboard: "Dashboard"
+  
+  # Common actions
+  actions:
+    new: "New"
+    edit: "Edit"
+    show: "Show"
+    delete: "Delete"
+    destroy: "Destroy"
+    back: "Back"
+    save: "Save"
+    cancel: "Cancel"
+    update: "Update"
+    create: "Create"
+    details: "Details"
+  
+  # Status
+  status:
+    latest: "Latest"
+    active: "Active"
+    inactive: "Inactive"
+    won: "Won"
+    lost: "Lost"
+    pending: "Pending"
+  
+  # Colors
+  colors:
+    red: "Red"
+    black: "Black"
+    green: "Green"
+  
+  # Weather
+  weather:
+    hot: "Hot Weather"
+    normal: "Normal Weather"
+    conservative: "Conservative (3-7%)"
+    normal_betting: "Normal (8-15%)"
+    temperature: "Temperature"
+    forecast: "Forecast"
+  
+  # Roulette
+  roulette:
+    title: "🎲 Roulette Rounds"
+    subtitle: "Live roulette rounds with AI-powered betting decisions"
+    round: "Round"
+    rounds: "Rounds"
+    result: "Result"
+    total_bets: "Total Bets"
+    players_count: "Players"
+    bets_count: "Bets"
+    auto_refresh: "Auto-refresh every 3min"
+    recent_rounds: "Recent Rounds"
+    player_bets: "Player Bets"
+    quick_summary: "Quick Summary"
+    won_by: "won by"
+    win_rate: "win rate"
+    latest_round: "Latest"
+  
+  # Players
+  players:
+    title: "Players"
+    subtitle: "Manage casino players and their balances"
+    name: "Name"
+    balance: "Balance"
+    total_bets: "Total Bets"
+    win_rate: "Win Rate"
+    total_winnings: "Total Winnings"
+    net_profit: "Net Profit"
+    favorite_color: "Favorite Color"
+    betting_history: "Recent Betting History"
+    ai_analysis: "AI Analysis"
+    emotional_state: "Emotional State"
+    risk_tolerance: "Risk Tolerance"
+    confidence: "Confidence"
+    reasoning: "Reasoning"
+    performance: "Performance"
+    patterns: "Patterns"
+    recent_bets: "Recent Bets"
+    all_in: "All In"
+    can_bet: "Can Bet"
+    cannot_bet: "Cannot Bet"
+  
+  # Bets
+  bets:
+    title: "Bets"
+    subtitle: "All roulette bets and their outcomes"
+    amount: "Amount"
+    color: "Color"
+    player: "Player"
+    round: "Round"
+    winnings: "Winnings"
+    outcome: "Outcome"
+    ai_decision: "AI Decision"
+    ai_confidence: "AI Confidence"
+    ai_reasoning: "AI Reasoning"
+    percentage_of_balance: "of balance"
+    hot_weather: "Hot"
+    normal_weather: "Normal"
+  
+  # Analytics
+  analytics:
+    title: "Analytics Dashboard"
+    subtitle: "Comprehensive casino performance insights"
+    overview: "Overview"
+    total_rounds: "Total Rounds"
+    total_bets: "Total Bets"
+    total_wagered: "Total Wagered"
+    total_winnings: "Total Winnings"
+    average_bet: "Average Bet"
+    player_performance: "Player Performance"
+    ai_insights: "AI Insights"
+    weather_impact: "Weather Impact"
+    betting_trends: "Betting Trends"
+    hot_weather_rounds: "Hot Weather Rounds"
+    normal_weather_rounds: "Normal Weather Rounds"
+    hot_weather_avg_bet: "Hot Weather Avg Bet"
+    normal_weather_avg_bet: "Normal Weather Avg Bet"
+    player_analysis: "Player Analysis"
+    risk_analysis: "Risk Analysis"
+    emotional_analysis: "Emotional Analysis"
+    strategy_analysis: "Strategy Analysis"
+    recent_performance: "Recent Performance"
+    total_wagered: "Total Wagered"
+    net_profit: "Net Profit"
+    favorite_color: "Favorite Color"
+    betting_patterns: "Betting Patterns"
+    color_loyalist: "Color Loyalist"
+    color_switcher: "Color Switcher"
+    increasing_bets: "Increasing Bets"
+    decreasing_bets: "Decreasing Bets"
+    hot_streak: "Hot Streak"
+    cold_streak: "Cold Streak"
+    unpredictable: "Unpredictable"
+    new_player: "New Player"
+  
+  # Messages
+  messages:
+    created: "%{resource} was successfully created."
+    updated: "%{resource} was successfully updated."
+    destroyed: "%{resource} was successfully destroyed."
+    error: "There was an error processing your request."
+    not_found: "%{resource} not found."
+    unauthorized: "You are not authorized to perform this action."
+  
+  # Time
+  time:
+    ago: "%{time} ago"
+    just_now: "Just now"
+    minutes: "minutes"
+    hours: "hours"
+    days: "days"
+  
+  # Numbers
+  numbers:
+    currency: "$%{number}"
+    percentage: "%{number}%"
+    decimal: "%{number}"
+  
+  # AI
+  ai:
+    analysis: "AI Analysis"
+    reasoning: "AI Reasoning"
+    confidence: "AI Confidence"
+    emotional_state: "Emotional State"
+    risk_tolerance: "Risk Tolerance"
+    betting_strategy: "Betting Strategy"
+    unavailable: "AI analysis unavailable"
+    fallback: "Fallback analysis due to AI service unavailability"
+    temporary_unavailable: "AI analysis temporarily unavailable"
+  
+  # Performance
+  performance:
+    hot: "Hot"
+    cold: "Cold"
+    neutral: "Neutral"
+    conservative: "Conservative"
+    balanced: "Balanced"
+    aggressive: "Aggressive"
+    desperate: "Desperate"
+    percentage_based: "Percentage Based"
+    momentum_based: "Momentum Based"
+    all_in: "All In"

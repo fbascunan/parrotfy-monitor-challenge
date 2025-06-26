@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="<%= I18n.locale %>">
   <head>
-    <title><%= content_for(:title) || "Parrotfy Monitor Challenge" %></title>
+    <title><%= content_for(:title) || t('app_name') %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -29,13 +29,21 @@
         <div class="flex justify-between h-16">
           <div class="flex">
             <div class="flex-shrink-0 flex items-center">
-              <h1 class="text-xl font-bold text-gray-900">🎰 Parrotfy Casino</h1>
+              <h1 class="text-xl font-bold text-gray-900">🎰 <%= t('casino_name') %></h1>
             </div>
             <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-              <%= link_to "Rounds", root_path, class: "inline-flex items-center px-1 pt-1 border-b-2 #{current_page?(root_path) ? 'border-blue-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'} text-sm font-medium" %>
-              <%= link_to "Players", players_path, class: "inline-flex items-center px-1 pt-1 border-b-2 #{current_page?(players_path) ? 'border-blue-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'} text-sm font-medium" %>
-              <%= link_to "Analytics", analytics_dashboard_path, class: "inline-flex items-center px-1 pt-1 border-b-2 #{current_page?(analytics_dashboard_path) ? 'border-blue-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'} text-sm font-medium" %>
+              <%= link_to t('nav_rounds'), root_path, class: "inline-flex items-center px-1 pt-1 border-b-2 #{current_page?(root_path) ? 'border-blue-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'} text-sm font-medium" %>
+              <%= link_to t('nav_players'), players_path, class: "inline-flex items-center px-1 pt-1 border-b-2 #{current_page?(players_path) ? 'border-blue-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'} text-sm font-medium" %>
+              <%= link_to t('nav_analytics'), analytics_dashboard_path, class: "inline-flex items-center px-1 pt-1 border-b-2 #{current_page?(analytics_dashboard_path) ? 'border-blue-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'} text-sm font-medium" %>
               <%= link_to "Sidekiq", "/sidekiq", target: "_blank", class: "inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 text-sm font-medium" %>
+            </div>
+          </div>
+          
+          <!-- Language Switcher -->
+          <div class="flex items-center space-x-2">
+            <div class="flex items-center space-x-1 bg-gray-100 rounded-lg p-1">
+              <%= link_to "EN", url_for(locale: :en), class: "px-2 py-1 text-xs font-medium rounded #{I18n.locale == :en ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-600 hover:text-gray-900'}" %>
+              <%= link_to "ES", url_for(locale: :es), class: "px-2 py-1 text-xs font-medium rounded #{I18n.locale == :es ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-600 hover:text-gray-900'}" %>
             </div>
           </div>
         </div>

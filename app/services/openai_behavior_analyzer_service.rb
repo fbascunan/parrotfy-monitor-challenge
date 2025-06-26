@@ -232,12 +232,14 @@ class OpenaiBehaviorAnalyzerService
     total = weights.values.sum
     random = rand(total)
 
+    cumulative_weight = 0
     weights.each do |color, weight|
-      return color if random < weight
-      random -= weight
+      cumulative_weight += weight
+      return color if random < cumulative_weight
     end
 
-    "red"
+    # Fallback to random selection if something goes wrong
+    ["red", "black", "green"].sample
   end
 
   def calculate_fallback_modifier
