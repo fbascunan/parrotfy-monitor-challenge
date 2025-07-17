@@ -22,7 +22,7 @@ gem "jbuilder"
 # Sidekiq for background jobs
 gem "sidekiq", "~> 7.0"
 # Redis for Sidekiq
-gem "redis", "~> 5.0"
+gem "redis", "~> 5.4"
 
 # HTTP client for weather API
 gem "httparty", "~> 0.21"
